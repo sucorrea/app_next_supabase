@@ -1,9 +1,10 @@
 'use server';
 
-import { encodedRedirect } from '@/utils/utils';
-import { createClient } from '@/utils/supabase/server';
 import { headers } from 'next/headers';
 import { redirect } from 'next/navigation';
+
+import { createClient } from '@/utils/supabase/server';
+import { encodedRedirect } from '@/utils/utils';
 
 export const signUpAction = async (formData: FormData) => {
   const email = formData.get('email')?.toString();
@@ -12,7 +13,7 @@ export const signUpAction = async (formData: FormData) => {
   const origin = headers().get('origin');
 
   if (!email || !password) {
-    return { error: 'Email and password are required' };
+    return { error: 'E-mail e senha sao obrigatórios' };
   }
 
   const { error } = await supabase.auth.signUp({
@@ -30,7 +31,7 @@ export const signUpAction = async (formData: FormData) => {
     return encodedRedirect(
       'success',
       '/sign-up',
-      'Thanks for signing up! Please check your email for a verification link.'
+      'Obrigado por se inscrever! Por favor, verifique seu e-mail para verificação com o link de confirmação.'
     );
   }
 };
