@@ -1,13 +1,13 @@
-import { signUpAction } from '@/app/actions'
-import FormMessage, { Message } from '@/components/form-message'
-import { SubmitButton } from '@/components/submit-button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import Link from 'next/link'
+import { signUpAction } from '@/app/actions';
+import FormMessage, { Message } from '@/components/form-message';
+import { SubmitButton } from '@/components/submit-button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import Link from 'next/link';
 
 type SignupProps = {
-  searchParams: Message
-}
+  searchParams: Message;
+};
 
 const Signup = ({ searchParams }: SignupProps) => {
   if ('message' in searchParams) {
@@ -15,7 +15,7 @@ const Signup = ({ searchParams }: SignupProps) => {
       <div className="w-full flex-1 flex items-center h-screen sm:max-w-md justify-center gap-2 p-4">
         <FormMessage message={searchParams} />
       </div>
-    )
+    );
   }
 
   return (
@@ -46,7 +46,7 @@ const Signup = ({ searchParams }: SignupProps) => {
         </div>
       </form>
     </>
-  )
-}
+  );
+};
 
-export default Signup
+export default Signup;

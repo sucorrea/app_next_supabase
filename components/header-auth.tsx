@@ -1,12 +1,12 @@
-import { signOutAction } from '@/app/actions'
-import { createClient } from '@/utils/supabase/server'
-import Link from 'next/link'
-import { Button } from './ui/button'
+import { signOutAction } from '@/app/actions';
+import { createClient } from '@/utils/supabase/server';
+import Link from 'next/link';
+import { Button } from './ui/button';
 
 export default async function AuthButton() {
   const {
     data: { user },
-  } = await createClient().auth.getUser()
+  } = await createClient().auth.getUser();
 
   return user ? (
     <div className="flex items-center gap-4">
@@ -26,5 +26,5 @@ export default async function AuthButton() {
         <Link href="/sign-up">Cadastrar</Link>
       </Button>
     </div>
-  )
+  );
 }

@@ -1,12 +1,12 @@
-import { resetPasswordAction } from '@/app/actions'
-import { FormMessage, Message } from '@/components/form-message'
-import { SubmitButton } from '@/components/submit-button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
+import { resetPasswordAction } from '@/app/actions';
+import { FormMessage, Message } from '@/components/form-message';
+import { SubmitButton } from '@/components/submit-button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 
 type ResetPasswordProps = {
-  searchParams: Message
-}
+  searchParams: Message;
+};
 
 const ResetPassword = async ({ searchParams }: ResetPasswordProps) => {
   return (
@@ -34,6 +34,6 @@ const ResetPassword = async ({ searchParams }: ResetPasswordProps) => {
       </SubmitButton>
       <FormMessage message={searchParams} />
     </form>
-  )
-}
-export default ResetPassword
+  );
+};
+export default ResetPassword;

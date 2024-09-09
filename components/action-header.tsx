@@ -1,5 +1,5 @@
-import Link from 'next/link'
-import { Button } from './ui/button'
+import Link from 'next/link';
+import { Button } from './ui/button';
 
 const ActionHeader = () => (
   <div className="flex gap-4 items-center">
@@ -24,6 +24,6 @@ const ActionHeader = () => (
       </Button>
     </div>
   </div>
-)
+);
 
-export default ActionHeader
+export default ActionHeader;

@@ -1,12 +1,12 @@
-import { forgotPasswordAction } from '@/app/actions'
-import { FormMessage, Message } from '@/components/form-message'
-import { SubmitButton } from '@/components/submit-button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import Link from 'next/link'
+import { forgotPasswordAction } from '@/app/actions';
+import FormMessage, { Message } from '@/components/form-message';
+import { SubmitButton } from '@/components/submit-button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import Link from 'next/link';
 
 interface ForgotPasswordProps {
-  searchParams: Message
+  searchParams: Message;
 }
 
 const ForgotPassword = ({ searchParams }: ForgotPasswordProps) => {
@@ -32,7 +32,7 @@ const ForgotPassword = ({ searchParams }: ForgotPasswordProps) => {
         </div>
       </form>
     </>
-  )
-}
+  );
+};
 
-export default ForgotPassword
+export default ForgotPassword;

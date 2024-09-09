@@ -1,13 +1,13 @@
-import { signInAction } from '@/app/actions'
-import { FormMessage, Message } from '@/components/form-message'
-import { SubmitButton } from '@/components/submit-button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import Link from 'next/link'
+import { signInAction } from '@/app/actions';
+import { FormMessage, Message } from '@/components/form-message';
+import { SubmitButton } from '@/components/submit-button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import Link from 'next/link';
 
 type LoginProps = {
-  searchParams: Message
-}
+  searchParams: Message;
+};
 
 const Login = ({ searchParams }: LoginProps) => {
   return (
@@ -43,7 +43,7 @@ const Login = ({ searchParams }: LoginProps) => {
         <FormMessage message={searchParams} />
       </div>
     </form>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;

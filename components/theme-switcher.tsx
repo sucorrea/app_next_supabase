@@ -1,30 +1,31 @@
-'use client'
+'use client';
+import { useEffect, useState } from 'react';
 
-import { Button } from '@/components/ui/button'
+import { Laptop, Moon, Sun } from 'lucide-react';
+import { useTheme } from 'next-themes';
+
+import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuRadioGroup,
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu'
-import { Laptop, Moon, Sun } from 'lucide-react'
-import { useTheme } from 'next-themes'
-import { useEffect, useState } from 'react'
+} from '@/components/ui/dropdown-menu';
 
 const ThemeSwitcher = () => {
-  const [mounted, setMounted] = useState(false)
-  const { theme, setTheme } = useTheme()
+  const [mounted, setMounted] = useState(false);
+  const { theme, setTheme } = useTheme();
 
   useEffect(() => {
-    setMounted(true)
-  }, [])
+    setMounted(true);
+  }, []);
 
   if (!mounted) {
-    return null
+    return null;
   }
 
-  const ICON_SIZE = 16
+  const ICON_SIZE = 16;
 
   return (
     <DropdownMenu>
@@ -71,7 +72,7 @@ const ThemeSwitcher = () => {
         </DropdownMenuRadioGroup>
       </DropdownMenuContent>
     </DropdownMenu>
-  )
-}
+  );
+};
 
-export { ThemeSwitcher }
+export { ThemeSwitcher };
