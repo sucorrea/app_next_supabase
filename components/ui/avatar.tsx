@@ -18,6 +18,7 @@ const Avatar = forwardRef<
     {...props}
   />
 ));
+
 Avatar.displayName = AvatarPrimitive.Root.displayName;
 
 const AvatarImage = forwardRef<
@@ -30,6 +31,7 @@ const AvatarImage = forwardRef<
     {...props}
   />
 ));
+
 AvatarImage.displayName = AvatarPrimitive.Image.displayName;
 
 const AvatarFallback = forwardRef<
@@ -45,6 +47,7 @@ const AvatarFallback = forwardRef<
     {...props}
   />
 ));
+
 AvatarFallback.displayName = AvatarPrimitive.Fallback.displayName;
 
 export { Avatar, AvatarFallback, AvatarImage };

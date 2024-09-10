@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 import { signInAction } from '@/app/actions';
 import FormMessage, { Message } from '@/components/form-message';
-import { SubmitButton } from '@/components/submit-button';
+import SubmitButton from '@/components/submit-button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 
@@ -32,14 +32,9 @@ const Login = ({ searchParams }: LoginProps) => {
             Esqueceu a senha?
           </Link>
         </div>
-        <Input
-          type="password"
-          name="password"
-          placeholder="Your password"
-          required
-        />
-        <SubmitButton pendingText="Signing In..." formAction={signInAction}>
-          Sign in
+        <Input type="password" name="password" placeholder="Senha" required />
+        <SubmitButton pendingText="Entrando..." formAction={signInAction}>
+          Entrar
         </SubmitButton>
         <FormMessage message={searchParams} />
       </div>

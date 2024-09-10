@@ -13,7 +13,7 @@ export const signUpAction = async (formData: FormData) => {
   const origin = headers().get('origin');
 
   if (!email || !password) {
-    return { error: 'E-mail e senha sao obrigatórios' };
+    return { error: 'E-mail e senha são obrigatórios' };
   }
 
   const { error } = await supabase.auth.signUp({
@@ -60,7 +60,7 @@ export const forgotPasswordAction = async (formData: FormData) => {
   const callbackUrl = formData.get('callbackUrl')?.toString();
 
   if (!email) {
-    return encodedRedirect('error', '/forgot-password', 'Email is required');
+    return encodedRedirect('error', '/forgot-password', 'E-mail é obrigatório');
   }
 
   const { error } = await supabase.auth.resetPasswordForEmail(email, {
@@ -72,7 +72,7 @@ export const forgotPasswordAction = async (formData: FormData) => {
     return encodedRedirect(
       'error',
       '/forgot-password',
-      'Could not reset password'
+      'Não foi possível redefinir a senha'
     );
   }
 
@@ -83,7 +83,7 @@ export const forgotPasswordAction = async (formData: FormData) => {
   return encodedRedirect(
     'success',
     '/forgot-password',
-    'Check your email for a link to reset your password.'
+    'Verifique seu e-mail para obter um link para redefinir sua senha.'
   );
 };
 
@@ -97,7 +97,7 @@ export const resetPasswordAction = async (formData: FormData) => {
     encodedRedirect(
       'error',
       '/protected/reset-password',
-      'Password and confirm password are required'
+      'Senha e confirmação de senha são obrigatórias'
     );
   }
 
@@ -105,7 +105,7 @@ export const resetPasswordAction = async (formData: FormData) => {
     encodedRedirect(
       'error',
       '/protected/reset-password',
-      'Passwords do not match'
+      'As senhas não correspondem'
     );
   }
 
@@ -117,11 +117,11 @@ export const resetPasswordAction = async (formData: FormData) => {
     encodedRedirect(
       'error',
       '/protected/reset-password',
-      'Password update failed'
+      'Falha na alteração da senha'
     );
   }
 
-  encodedRedirect('success', '/protected/reset-password', 'Password updated');
+  encodedRedirect('success', '/protected/reset-password', 'Senha alterada');
 };
 
 export const signOutAction = async () => {

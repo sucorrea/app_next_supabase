@@ -12,10 +12,7 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-
-const ICON_SIZE = 16;
-
-const CLASS_ICON = 'text-muted-foreground';
+import { CLASS_ICON, ICON_SIZE, menuDropdown } from './utils';
 
 const icons: Record<'dark' | 'light' | 'system' | string, JSX.Element> = {
   light: <Sun key="light" size={ICON_SIZE} className={CLASS_ICON} />,
@@ -47,15 +44,15 @@ const ThemeSwitcher = () => {
           value={theme}
           onValueChange={(e) => setTheme(e)}
         >
-          <DropdownMenuRadioItem className="flex gap-2" value="light">
-            {icons['light']} <span>Claro</span>
-          </DropdownMenuRadioItem>
-          <DropdownMenuRadioItem className="flex gap-2" value="dark">
-            {icons['dark']} <span>Escuro</span>
-          </DropdownMenuRadioItem>
-          <DropdownMenuRadioItem className="flex gap-2" value="system">
-            {icons['system']} <span>Sistema</span>
-          </DropdownMenuRadioItem>
+          {menuDropdown.map(({ value, label }) => (
+            <DropdownMenuRadioItem
+              key={value}
+              className="flex gap-2"
+              value={value}
+            >
+              {icons[value]} <span>{label}</span>
+            </DropdownMenuRadioItem>
+          ))}
         </DropdownMenuRadioGroup>
       </DropdownMenuContent>
     </DropdownMenu>
