@@ -12,18 +12,18 @@ type LoginProps = {
 
 const Login = ({ searchParams }: LoginProps) => {
   return (
-    <form className="flex-1 flex flex-col min-w-64">
+    <form className="flex min-w-64 flex-1 flex-col">
       <h1 className="text-2xl font-medium">Login</h1>
       <p className="text-sm text-foreground">
         Não tem uma conta?{' '}
-        <Link className="text-foreground font-medium underline" href="/sign-up">
+        <Link className="font-medium text-foreground underline" href="/sign-up">
           Cadastre-se
         </Link>
       </p>
-      <div className="flex flex-col gap-2 [&>input]:mb-3 mt-8">
+      <div className="mt-8 flex flex-col gap-2 [&>input]:mb-3">
         <Label htmlFor="email">E-mail</Label>
         <Input name="email" placeholder="e-mail" required />
-        <div className="flex justify-between items-center">
+        <div className="flex items-center justify-between">
           <Label htmlFor="password">Senha</Label>
           <Link
             className="text-xs text-foreground underline"

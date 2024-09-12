@@ -1,6 +1,6 @@
 import Lulus from '@/components/lulus';
 
-const Home = () => {
+const Lulu = () => {
   return (
     <div className="flex flex-col items-center gap-16">
       <Lulus />
@@ -8,4 +8,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Lulu;

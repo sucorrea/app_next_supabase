@@ -5,7 +5,7 @@ type LayoutProps = {
 };
 
 const Layout = ({ children }: LayoutProps) => (
-  <div className="max-w-7xl flex flex-col gap-12 items-start">{children}</div>
+  <div className="flex max-w-7xl flex-col items-start gap-12">{children}</div>
 );
 
 export default Layout;

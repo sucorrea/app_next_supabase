@@ -12,7 +12,7 @@ type SignupProps = {
 const Signup = ({ searchParams }: SignupProps) => {
   if ('message' in searchParams) {
     return (
-      <div className="w-full flex-1 flex items-center h-screen sm:max-w-md justify-center gap-2 p-4">
+      <div className="flex h-screen w-full flex-1 items-center justify-center gap-2 p-4 sm:max-w-md">
         <FormMessage message={searchParams} />
       </div>
     );
@@ -20,15 +20,15 @@ const Signup = ({ searchParams }: SignupProps) => {
 
   return (
     <>
-      <form className="flex flex-col min-w-64 max-w-64 mx-auto">
+      <form className="mx-auto flex min-w-64 max-w-64 flex-col">
         <h1 className="text-2xl font-medium">Cadastro</h1>
-        <p className="text-sm text text-foreground">
+        <p className="text text-sm text-foreground">
           Já possui uma conta?{' '}
-          <Link className="text-primary font-medium underline" href="/sign-in">
+          <Link className="font-medium text-primary underline" href="/sign-in">
             Entrar
           </Link>
         </p>
-        <div className="flex flex-col gap-2 [&>input]:mb-3 mt-8">
+        <div className="mt-8 flex flex-col gap-2 [&>input]:mb-3">
           <Label htmlFor="email">E-mail</Label>
           <Input name="email" placeholder="e-mail" required />
           <Label htmlFor="password">Senha</Label>

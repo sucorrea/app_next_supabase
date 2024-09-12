@@ -1,0 +1,62 @@
+SELECT
+  aniversarios2024."idAniversariante",
+  aniversariante.nome AS aniversarianteNome,
+  aniversariante.foto AS aniversarianteFoto,
+  aniversariante.birthdate AS aniversarianteBirthdate,
+  aniversariante.iconesigno AS aniversarianteIconeSigno,
+  aniversarios2024."idResponsavel",
+  responsavel.nome AS responsavelNome,
+  responsavel.foto AS responsavelFoto
+FROM
+  aniversarios2024
+  JOIN lulus AS aniversariante ON aniversarios2024."idAniversariante" = aniversariante.id
+  JOIN lulus AS responsavel ON aniversarios2024."idResponsavel" = responsavel.id
+  ORDER BY
+  aniversarios2024."idAniversariante";
+  --NOVA FUNÇÃO COM PIX
+
+DO $$
+BEGIN
+  IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'chaveenum') THEN
+    CREATE TYPE chaveEnum AS ENUM ('email', 'celular', 'aleatoria', 'cpf');
+  END IF;
+END $$;
+
+DROP FUNCTION IF EXISTS get_aniversarios();
+
+CREATE OR REPLACE FUNCTION get_aniversarios()
+RETURNS TABLE (
+    idAniversariante INTEGER,
+    aniversarianteNome VARCHAR,
+    aniversarianteFoto VARCHAR,
+    aniversarianteBirthdate DATE,
+    aniversarianteIconeSigno text, -- Modificação aqui
+    aniversarianteTipoChavePix chaveEnum,
+    aniversarianteChavePix text,
+    idResponsavel INTEGER,
+    responsavelNome VARCHAR,
+    responsavelFoto VARCHAR
+) AS $$
+BEGIN
+  RETURN QUERY
+  SELECT
+    aniversarios2024."idAniversariante",
+    aniversariante.nome AS aniversarianteNome,
+    aniversariante.foto AS aniversarianteFoto,
+    aniversariante.birthdate AS aniversarianteBirthdate,
+    aniversariante.iconesigno AS aniversarianteIconeSigno, -- Cast explícito
+    aniversariante."tipoChavePix" AS aniversarianteTipoChavePix,
+    aniversariante."chavePix" AS aniversarianteChavePix,
+    aniversarios2024."idResponsavel",
+    responsavel.nome AS responsavelNome,
+    responsavel.foto AS responsavelFoto
+  FROM
+    aniversarios2024
+    JOIN lulus AS aniversariante ON aniversarios2024."idAniversariante" = aniversariante.id
+    JOIN lulus AS responsavel ON aniversarios2024."idResponsavel" = responsavel.id
+  ORDER BY
+    aniversarios2024."idAniversariante";
+END;
+$$ LANGUAGE plpgsql;
+
+
