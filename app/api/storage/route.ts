@@ -1,10 +1,10 @@
 // app/api/storage/route.ts
-import { createClient } from '@/utils/supabase/server';
+import { supabase } from '@/utils/supabase/client';
 import { NextResponse } from 'next/server';
 
 export async function GET() {
   try {
-    const { data, error } = await createClient().storage.listBuckets();
+    const { data, error } = await supabase.storage.getBucket('app_storage');
 
     if (error) {
       throw new Error(error.message);

@@ -8,8 +8,8 @@ export declare type HttpResponseBucket<T> = {
 };
 
 export const GET = async () => {
-  const { data } = await createClient().storage.listBuckets();
-
+  const { data } = await createClient()
+    .storage.from('app_storage')
+    .list('images/', {});
   return NextResponse.json(data);
-  //return data;
 };

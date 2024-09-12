@@ -60,3 +60,151 @@ END;
 $$ LANGUAGE plpgsql;
 
 
+
+-- inclusão apelido e sobrenome
+DO $$
+BEGIN
+  IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'chaveenum') THEN
+    CREATE TYPE chaveEnum AS ENUM ('email', 'celular', 'aleatoria', 'cpf');
+  END IF;
+END $$;
+
+DROP FUNCTION IF EXISTS get_aniversarios();
+
+CREATE OR REPLACE FUNCTION get_aniversarios()
+RETURNS TABLE (
+    idAniversariante INTEGER,
+    aniversarianteNome VARCHAR,
+    aniversarianteFoto VARCHAR,
+    aniversarianteBirthdate DATE,
+    aniversarianteIconeSigno text,
+    aniversarianteTipoChavePix chaveEnum,
+    aniversarianteChavePix text,
+    aniversarianteApelido text,
+    aniversarianteSobrenome text,
+    idResponsavel INTEGER,
+    responsavelNome VARCHAR,
+    responsavelFoto VARCHAR,
+    responsavelApelido text
+) AS $$
+BEGIN
+  RETURN QUERY
+  SELECT
+    aniversarios2024."idAniversariante",
+    aniversariante.nome AS aniversarianteNome,
+    aniversariante.foto AS aniversarianteFoto,
+    aniversariante.birthdate AS aniversarianteBirthdate,
+    aniversariante.iconesigno AS aniversarianteIconeSigno,
+    aniversariante."tipoChavePix" AS aniversarianteTipoChavePix,
+    aniversariante."chavePix" AS aniversarianteChavePix,
+      aniversariante.apelido AS  aniversarianteApelido ,
+    aniversariante.sobrenome AS aniversarianteSobrenome ,
+    aniversarios2024."idResponsavel",
+    responsavel.nome AS responsavelNome,
+    responsavel.foto AS responsavelFoto,
+    responsavel.apelido as responsavelApelido
+  FROM
+    aniversarios2024
+    JOIN lulus AS aniversariante ON aniversarios2024."idAniversariante" = aniversariante.id
+    JOIN lulus AS responsavel ON aniversarios2024."idResponsavel" = responsavel.id
+  ORDER BY
+    aniversarios2024."idAniversariante";
+END;
+$$ LANGUAGE plpgsql;
+DO $$
+BEGIN
+  IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'chaveenum') THEN
+    CREATE TYPE chaveEnum AS ENUM ('email', 'celular', 'aleatoria', 'cpf');
+  END IF;
+END $$;
+
+DROP FUNCTION IF EXISTS get_aniversarios();
+
+CREATE OR REPLACE FUNCTION get_aniversarios()
+RETURNS TABLE (
+    idAniversariante INTEGER,
+    aniversarianteNome VARCHAR,
+    aniversarianteFoto VARCHAR,
+    aniversarianteBirthdate timestamp,
+    aniversarianteIconeSigno text,
+    aniversarianteTipoChavePix chaveEnum,
+    aniversarianteChavePix text,
+    aniversarianteApelido text,
+    aniversarianteSobrenome text,
+    aniversariantInstagram text,
+    idResponsavel INTEGER,
+    responsavelNome VARCHAR,
+    responsavelFoto VARCHAR,
+    responsavelApelido text
+) AS $$
+BEGIN
+  RETURN QUERY
+  SELECT
+    aniversarios2024."idAniversariante",
+    aniversariante.nome AS aniversarianteNome,
+    aniversariante.foto AS aniversarianteFoto,
+    aniversariante.birthdate AS aniversarianteBirthdate,
+    aniversariante.iconesigno AS aniversarianteIconeSigno,
+    aniversariante."tipoChavePix" AS aniversarianteTipoChavePix,
+    aniversariante."chavePix" AS aniversarianteChavePix,
+      aniversariante.apelido AS  aniversarianteApelido ,
+    aniversariante.sobrenome AS aniversarianteSobrenome ,
+    aniversariante.instagram AS aniversariantInstagram ,
+    aniversarios2024."idResponsavel",
+    responsavel.nome AS responsavelNome,
+    responsavel.foto AS responsavelFoto,
+    responsavel.apelido as responsavelApelido
+  FROM
+    aniversarios2024
+    JOIN lulus AS aniversariante ON aniversarios2024."idAniversariante" = aniversariante.id
+    JOIN lulus AS responsavel ON aniversarios2024."idResponsavel" = responsavel.id
+  ORDER BY
+    aniversarios2024."idAniversariante";
+END;
+$$ LANGUAGE plpgsql;
+
+
+[
+  {
+    "get_aniversarios": "(1,\"Deborah \r\n\",/fotos/Deborah.jpg,\"2000-01-10 00:00:00\",noto-v1:capricorn,,\"\",,\"Cristina de Carvalho\",deborahcarvalho181,13,\"Aline \",/fotos/Aline.jpg,)"
+  },
+  {
+    "get_aniversarios": "(2,\"Ana Paula \",/fotos/AnaPaulaMaita.jpg,\"2000-01-18 00:00:00\",noto-v1:capricorn,,\"\",,\"da Cunha Maita\",anapaulamaita,12,\"Camila \",/fotos/Camila.jpg,)"
+  },
+  {
+    "get_aniversarios": "(3,\"Stella \",/fotos/Stella.jpg,\"2000-04-04 00:00:00\",noto-v1:aries,,\"\",,\"Racy Barbi Ronqui\",stellabr,6,Carolina,/fotos/CarolMaita.jpg,\"Carol Maita\")"
+  },
+  {
+    "get_aniversarios": "(4,Sueli,/fotos/sucorrea.png,\"1985-04-09 00:00:00\",noto-v1:aries,cpf,31511703822,,\" Corrêa de Oliveira\",suelli_correaa,8,Letícia,/fotos/Leticia.jpg,)"
+  },
+  {
+    "get_aniversarios": "(5,\"Andrea \",/fotos/Deia.jpg,\"2000-05-15 00:00:00\",noto-v1:taurus,cpf,27631283869,Deia,\"Luzia Morales Pontes\",deia_morales,11,\"Cristiane \",/fotos/Nani.jpg,Nani)"
+  },
+  {
+    "get_aniversarios": "(6,Carolina,/fotos/CarolMaita.jpg,\"2000-05-28 00:00:00\",noto-v1:gemini,cpf,28375340804,\"Carol Maita\",\" Maita\",carolmaita,7,\"Ana Carolina \",/fotos/Aninha.png,Aninha)"
+  },
+  {
+    "get_aniversarios": "(7,\"Ana Carolina \",/fotos/Aninha.png,\"1976-08-09 00:00:00\",noto-v1:leo,cpf,11060647800,Aninha,\"A. Munhoz Mori\",ac_munhozmori,5,\"Andrea \",/fotos/Deia.jpg,Deia)"
+  },
+  {
+    "get_aniversarios": "(8,Letícia,/fotos/Leticia.jpg,\"2000-08-24 00:00:00\",noto-v1:virgo,cpf,96385274155,,\" Gonçalves Batista\",leticiagbatista,10,Carolina,/fotos/CarolMori.jpg,\"Carol Mori\")"
+  },
+  {
+    "get_aniversarios": "(9,Vanessa,/fotos/Vanessa.jpg,\"2000-09-07 00:00:00\",noto-v1:virgo,cpf,27423754811,,\" Ambrosio Rebouças e Paula Lima\",van_reboucas,4,Sueli,/fotos/sucorrea.png,)"
+  },
+  {
+    "get_aniversarios": "(10,Carolina,/fotos/CarolMori.jpg,\"2000-09-26 00:00:00\",noto-v1:libra,celular,14997402449,\"Carol Mori\",\" Mori Mendonça\",moricarol,9,Vanessa,/fotos/Vanessa.jpg,)"
+  },
+  {
+    "get_aniversarios": "(11,\"Cristiane \",/fotos/Nani.jpg,\"2000-10-26 00:00:00\",noto-v1:scorpio,email,nanicrivelli@uol.com.br,Nani,\"Crivelli Carvalho\",nacasadanani,2,\"Ana Paula \",/fotos/AnaPaulaMaita.jpg,)"
+  },
+  {
+    "get_aniversarios": "(12,\"Camila \",/fotos/Camila.jpg,\"1984-11-15 00:00:00\",noto-v1:scorpio,celular,14997093599,,\"Paulino Gatti\",camilapgatti,1,\"Deborah \r\n\",/fotos/Deborah.jpg,)"
+  },
+  {
+    "get_aniversarios": "(13,\"Aline \",/fotos/Aline.jpg,\"2000-11-27 00:00:00\",noto-v1:sagittarius,celular,14996119998,,\"Aparecida Ribeiro Munho\",alinneribeirosemijoias,14,\"Cássia \",/fotos/Cassia.jpg,)"
+  },
+  {
+    "get_aniversarios": "(14,\"Cássia \",/fotos/Cassia.jpg,\"2000-12-11 00:00:00\",noto-v1:sagittarius,cpf,15832509803,,\"de Paiva Vieira Andrade\",cassiavieiraandrade,3,\"Stella \",/fotos/Stella.jpg,)"
+  }
+]

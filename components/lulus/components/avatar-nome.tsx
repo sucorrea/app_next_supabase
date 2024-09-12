@@ -1,6 +1,8 @@
+import { Row } from '@tanstack/react-table';
+
 import { Aniversario } from '@/app/api/aniversarios/Models/Output/Types';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Row } from '@tanstack/react-table';
+import { cn } from '@/lib/utils';
 
 interface AvatarNomeProps {
   row: Row<Aniversario>;
@@ -18,18 +20,20 @@ const AvatarNome = ({ row, isResponsavel = false }: AvatarNomeProps) => {
   } = row.original ?? ({} as Aniversario);
 
   const nome = isResponsavel
-    ? (responsavelnome ?? responsavelapelido)
+    ? (responsavelapelido ?? responsavelnome)
     : (aniversarianteapelido ?? aniversariantenome);
 
   const foto = isResponsavel ? responsavelfoto : aniversariantefoto;
 
+  const classResponsavel = isResponsavel ? 'flex-row-reverse' : '';
+
   return (
-    <div className="flex items-center gap-2">
+    <div className={cn('flex items-center gap-2', classResponsavel)}>
       <Avatar>
         <AvatarImage src={foto} alt={nome} title={nome} />
         <AvatarFallback>{nome.charAt(0)}</AvatarFallback>
       </Avatar>
-      <div className="capitalize">{nome}</div>
+      <p className="text-nowrap capitalize">{nome}</p>
     </div>
   );
 };

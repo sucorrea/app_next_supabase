@@ -1,10 +1,6 @@
 'use client';
-import { useState } from 'react';
-
-import { Icon } from '@iconify/react';
 import { ChevronDownIcon } from '@radix-ui/react-icons';
 import {
-  ColumnDef,
   ColumnFiltersState,
   VisibilityState,
   flexRender,
@@ -13,11 +9,9 @@ import {
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table';
+import { useState } from 'react';
 
-import {
-  Aniversario,
-  TipoChavePix,
-} from '@/app/api/aniversarios/Models/Output/Types';
+import { Aniversario } from '@/app/api/aniversarios/Models/Output/Types';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -34,92 +28,15 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { Input } from '../ui/input';
-import AvatarNome from './components/avatar-nome';
-import { formatterChavePix, formatterDate } from './utils';
-
-export const columns: ColumnDef<Aniversario>[] = [
-  {
-    accessorKey: 'idaniversariante',
-    header: '',
-    maxSize: 10,
-    size: 10,
-  },
-  {
-    accessorKey: 'aniversariantenome',
-    header: 'Aniversariante',
-    cell: ({ row }) => <AvatarNome row={row} />,
-    size: 50,
-    maxSize: 50,
-  },
-  {
-    accessorKey: 'aniversarianteiconesigno',
-    header: 'Signo',
-    maxSize: 50,
-    minSize: 50,
-    cell: ({ row }) => <Icon icon={row.getValue('aniversarianteiconesigno')} />,
-    size: 50,
-  },
-  // {
-  //   accessorKey: 'insta',
-  //   header: 'Instagram',
-  //   maxSize: 50,
-  //   minSize: 50,
-  //   cell: ({ row }) => (
-  //     <Link href={`https://instagram.com/${row.getValue('insta')}`}>
-  //       <Icon icon={row.getValue('aniversarianteiconesigno')} />
-  //     </Link>
-  //   ),
-  //   size: 50,
-  // },
-  {
-    accessorKey: 'aniversariantebirthdate',
-    header: 'Aniversário',
-    cell: ({ row: { getValue } }) => {
-      const data = formatterDate(getValue('aniversariantebirthdate') ?? '');
-      const aniversario = data.lastIndexOf(' de ');
-      return data.substring(0, aniversario);
-    },
-  },
-  {
-    accessorKey: 'aniversariantetipochavepix',
-    header: 'Tipo Chave Pix',
-    maxSize: 10,
-    size: 10,
-    cell: ({ row: { getValue } }) => {
-      const tipoChave = getValue('aniversariantetipochavepix') as
-        | string
-        | undefined;
-      return (
-        <div className={tipoChave === 'cpf' ? 'uppercase' : 'capitalize'}>
-          {getValue('aniversariantetipochavepix')}
-        </div>
-      );
-    },
-  },
-  {
-    accessorKey: 'aniversariantechavepix',
-    header: 'Chave Pix',
-    cell: ({ row: { getValue } }) => {
-      const tipoChave = getValue('aniversariantetipochavepix') as TipoChavePix;
-      const chave = getValue('aniversariantechavepix') as string;
-      return formatterChavePix(tipoChave, chave);
-    },
-  },
-  {
-    accessorKey: 'responsavelnome',
-    header: 'Responsável',
-    cell: ({ row }) => <AvatarNome row={row} isResponsavel />,
-    size: 50,
-    maxSize: 50,
-  },
-];
+import { Input } from '../../ui/input';
+import { useColumns } from './columns';
 
 type DataTableDemoProps = {
   data: Aniversario[];
 };
 
-export function DataTableDemo({ data }: DataTableDemoProps) {
+const ListaLulus = ({ data }: DataTableDemoProps) => {
+  const { columns } = useColumns();
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
 
@@ -233,4 +150,5 @@ export function DataTableDemo({ data }: DataTableDemoProps) {
       </div>
     </div>
   );
-}
+};
+export default ListaLulus;

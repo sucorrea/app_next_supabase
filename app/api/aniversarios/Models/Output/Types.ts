@@ -23,6 +23,7 @@ export interface Aniversario {
   responsavelnome: string;
   responsavelfoto: string;
   responsavelapelido: string;
+  aniversariantinstagram: string;
   aniversariantetipochavepix: TipoChavePix;
   aniversariantechavepix: string;
   aniversarianteapelido: string;
