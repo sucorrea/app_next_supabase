@@ -1,0 +1,31 @@
+DROP FUNCTION IF EXISTS get_fotoById(integer);
+
+CREATE OR REPLACE FUNCTION get_fotoById(id_lulu integer)
+RETURNS TABLE (
+    idLulu integer,
+    nomeLulu varchar,
+    idFoto uuid,
+    nome text ,
+    createAt timestamptz,
+    updateAt timestamptz,
+    documento jsonb
+) AS $$
+BEGIN
+  RETURN QUERY
+  SELECT
+    lulus.id AS idLulu,
+    lulus.nome AS nomeLulu,
+    fotos.id AS idFoto,
+    fotos.name AS nome,
+    fotos.created_at AS createAt,
+    fotos.updated_at AS updateAt,
+    fotos.metadata AS documento
+  FROM
+    storage.objects AS fotos
+    INNER JOIN lulus ON lulus.images = fotos.ID
+  WHERE
+    lulus.id = id_lulu;
+END;
+$$ LANGUAGE plpgsql;
+
+SELECT * FROM get_fotoById(6);

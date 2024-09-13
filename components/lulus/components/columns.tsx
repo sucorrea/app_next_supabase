@@ -15,10 +15,10 @@ import { formatterChavePix, formatterDate, getSigno } from './utils';
 
 export const useColumns = () => {
   const columns: ColumnDef<Aniversario>[] = [
-    {
-      accessorKey: 'idaniversariante',
-      header: '',
-    },
+    // {
+    //   accessorKey: 'idaniversariante',
+    //   header: '',
+    // },
     {
       accessorKey: 'aniversariantenome',
       header: 'Aniversariante',
@@ -90,9 +90,14 @@ export const useColumns = () => {
     {
       accessorKey: 'responsavelnome',
       header: () => (
-        <span className="flex flex-row-reverse items-center">Responsável</span>
+        <span className="flex flex-row-reverse items-center text-nowrap">
+          Responsável Vaquinha
+        </span>
       ),
-      cell: ({ row }) => <AvatarNome row={row} isResponsavel />,
+      cell: ({ row }) => {
+        const isParticipante = row.original.idresponsavel !== 29;
+        return isParticipante ? <AvatarNome row={row} isResponsavel /> : null;
+      },
       size: 50,
       maxSize: 50,
     },
