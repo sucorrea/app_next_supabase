@@ -4,14 +4,11 @@ import Image from 'next/image';
 import { Icon } from '@iconify/react';
 import { ColumnDef } from '@tanstack/react-table';
 
-import {
-  Aniversario,
-  TipoChavePix,
-} from '@/app/api/aniversarios/Models/Output/Types';
 import { LINK_HOROSCOPO_DIARIO, LINK_INSTAGRAM } from '@/utils/constants';
 import AvatarNome from './avatar-nome';
 import LinkIconWithText from './link-icon-with-text';
 import { formatterChavePix, formatterDate, getSigno } from './utils';
+import { Aniversario, TipoChavePix } from '@/utils/types/Types';
 
 export const useColumns = (isAuthenticated: boolean) => {
   const dadosAutenticados: ColumnDef<Aniversario>[] = [

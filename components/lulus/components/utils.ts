@@ -1,4 +1,4 @@
-import { TipoChavePix } from '@/app/api/aniversarios/Models/Output/Types';
+import { TipoChavePix } from '@/utils/types/Types';
 import { formatToCPF, formatToPhone } from 'brazilian-values';
 
 export const formatterDate = (data: string): string => {

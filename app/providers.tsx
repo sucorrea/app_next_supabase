@@ -2,6 +2,8 @@
 import { ReactNode } from 'react';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { ThemeProvider } from 'next-themes';
 
 const queryClient = new QueryClient();
 
@@ -10,7 +12,17 @@ type ProvidersProps = {
 };
 
 const Providers = ({ children }: ProvidersProps) => (
-  <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+  <ThemeProvider
+    attribute="class"
+    defaultTheme="system"
+    enableSystem
+    disableTransitionOnChange
+  >
+    <QueryClientProvider client={queryClient}>
+      <ReactQueryDevtools initialIsOpen={false} />
+      {children}
+    </QueryClientProvider>
+  </ThemeProvider>
 );
 
 export default Providers;
