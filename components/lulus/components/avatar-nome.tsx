@@ -3,12 +3,12 @@ import { useEffect, useState } from 'react';
 
 import { Row } from '@tanstack/react-table';
 
-import { Aniversario } from '@/app/api/aniversarios/Models/Output/Types';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { cn } from '@/lib/utils';
 import { LINK_LULU } from '@/utils/constants';
-import { fetchUrlImageById } from '@/utils/queries';
 import Link from 'next/link';
+import { Aniversario } from '@/utils/types/Types';
+import { getFotosById } from '@/app/actions';
 
 interface AvatarNomeProps {
   row: Row<Aniversario>;
@@ -28,7 +28,7 @@ const AvatarNome = ({ row, isResponsavel = false }: AvatarNomeProps) => {
   } = row.original ?? ({} as Aniversario);
 
   useEffect(() => {
-    fetchUrlImageById(isResponsavel ? idresponsavel : idaniversariante)
+    getFotosById(isResponsavel ? idresponsavel : idaniversariante)
       .then((res: string) => {
         if (res) {
           setImagem(res);
@@ -44,7 +44,7 @@ const AvatarNome = ({ row, isResponsavel = false }: AvatarNomeProps) => {
   const classResponsavel = isResponsavel ? 'flex-row-reverse' : '';
 
   return (
-    <Link href={`/lulu/${isResponsavel ? idresponsavel : idaniversariante}`}>
+    <Link href={`/lulus/${isResponsavel ? idresponsavel : idaniversariante}`}>
       <div className={cn('flex items-center gap-2', classResponsavel)}>
         <Avatar>
           <AvatarImage src={imagem} alt={nome} title={nome} />

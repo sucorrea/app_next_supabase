@@ -5,6 +5,7 @@ import { redirect } from 'next/navigation';
 
 import { createClient } from '@/utils/supabase/server';
 import { encodedRedirect } from '@/utils/utils';
+import { Aniversario, LuluById } from '@/utils/types/Types';
 
 export const signUpAction = async (formData: FormData) => {
   const email = formData.get('email')?.toString();
@@ -128,4 +129,73 @@ export const signOutAction = async () => {
   const supabase = createClient();
   await supabase.auth.signOut();
   return redirect('/sign-in');
+};
+export const getUser = async () => {
+  const supabase = createClient();
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  return { user };
+};
+
+export const getAniversarios = async () => {
+  const { data, error } = await createClient()
+    .rpc('get_aniversarios')
+    .select('*');
+
+  if (error) {
+    console.error(error);
+  }
+
+  return data as Aniversario[];
+};
+
+export async function getFotosById(id: number) {
+  const { data, error } = await createClient()
+    .rpc('get_fotobyid', { id_lulu: Number(id) })
+    .select('*')
+    .single();
+
+  const nomeArquivo = data?.nome ?? '';
+  const { data: urlFoto } = await createClient()
+    .storage.from('app_storage')
+    .getPublicUrl(nomeArquivo);
+
+  if (error) {
+    console.error(error);
+  }
+
+  return urlFoto.publicUrl as string;
+}
+
+export const getLuluById = async (idLulu: number): Promise<LuluById> => {
+  const { data, error } = await createClient()
+    .from('lulus')
+    .select('*')
+    .eq('id', idLulu)
+    .single();
+
+  if (error) {
+    console.error(error);
+  }
+  return data as LuluById;
+};
+
+export const getFotos = async () => {
+  const { data, error } = await createClient()
+    .storage.from('app_storage')
+    .list('images/');
+
+  const allUrls = data?.map(
+    (image) =>
+      createClient().storage.from('app_storage').getPublicUrl(image.name).data
+        .publicUrl
+  );
+  if (error) {
+    console.error(error);
+  }
+
+  return allUrls as string[];
 };

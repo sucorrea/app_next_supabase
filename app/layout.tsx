@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ReactNode, Suspense } from 'react';
 
 import { ThemeProvider } from 'next-themes';
 
@@ -33,24 +33,26 @@ const RootLayout = ({ children }: RootLayoutProps) => (
         disableTransitionOnChange
       >
         <Providers>
-          <main className="flex min-h-screen flex-col items-center">
-            <div className="flex w-full flex-1 flex-col items-center gap-20">
-              <nav className="flex h-16 w-full justify-center border-b border-b-foreground/10">
-                <div className="flex w-full max-w-5xl items-center justify-between p-3 px-5 text-sm">
-                  <div className="flex items-center gap-5 font-semibold">
-                    <ThemeSwitcher />
-                    <HeaderAuth />
+          <Suspense fallback={<p>Fetching data...</p>}>
+            <main className="flex min-h-screen flex-col items-center">
+              <div className="flex w-full flex-1 flex-col items-center gap-20">
+                <nav className="flex h-16 w-full justify-center border-b border-b-foreground/10">
+                  <div className="flex w-full max-w-5xl items-center justify-between p-3 px-5 text-sm">
+                    <div className="flex items-center gap-5 font-semibold">
+                      <ThemeSwitcher />
+                      <HeaderAuth />
+                    </div>
                   </div>
+                </nav>
+                <div className="flex max-w-5xl flex-col gap-20 p-5">
+                  {children}
                 </div>
-              </nav>
-              <div className="flex max-w-5xl flex-col gap-20 p-5">
-                {children}
+                <footer className="mx-auto flex w-full items-center justify-center gap-8 border-t py-16 text-center text-xs">
+                  <ThemeSwitcher />
+                </footer>
               </div>
-              <footer className="mx-auto flex w-full items-center justify-center gap-8 border-t py-16 text-center text-xs">
-                <ThemeSwitcher />
-              </footer>
-            </div>
-          </main>
+            </main>
+          </Suspense>
         </Providers>
       </ThemeProvider>
     </body>

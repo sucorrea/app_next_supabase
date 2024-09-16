@@ -1,4 +1,4 @@
-import { TipoChavePix } from '../../aniversarios/Models/Output/Types';
+import { TipoChavePix } from '@/utils/types/Types';
 
 export interface LuluById {
   id: number;

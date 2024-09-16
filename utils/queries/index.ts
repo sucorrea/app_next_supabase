@@ -1,13 +1,5 @@
-import { Aniversario } from '@/app/api/aniversarios/Models/Output/Types';
+import { LuluById } from '@/utils/queries/api/lulus/[id]/types';
 import { api } from './api';
-
-export const fetchAniversarios = async (): Promise<Aniversario[]> => {
-  const response = await api.get('aniversarios');
-  if (!response.data) {
-    throw new Error('Network response was not ok');
-  }
-  return response.data as Aniversario[];
-};
 
 export const fetchFotos = async (): Promise<string[]> => {
   const response = await api.get('fotos');
@@ -24,10 +16,11 @@ export const fetchUrlImageById = async (idLulu: number): Promise<string> => {
   }
   return response.data as string;
 };
-export const fetchLuluById = async (idLulu: number): Promise<string> => {
+
+export const fetchLuluById = async (idLulu: number): Promise<LuluById> => {
   const response = await api.get(`lulus/${idLulu}`);
   if (!response.data) {
     throw new Error('Network response was not ok');
   }
-  return response.data as string;
+  return response.data as LuluById;
 };

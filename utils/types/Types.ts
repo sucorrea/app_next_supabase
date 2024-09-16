@@ -29,3 +29,17 @@ export interface Aniversario {
   aniversarianteapelido: string;
   aniversariantesobrenome: string;
 }
+
+export interface LuluById {
+  id: number;
+  nome: string;
+  foto: string;
+  birthdate: string;
+  iconesigno: string;
+  chavePix: string;
+  tipoChavePix: null | TipoChavePix;
+  apelido: null | string;
+  sobrenome: string;
+  instagram: string;
+  images: string;
+}

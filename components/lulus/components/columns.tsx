@@ -13,12 +13,36 @@ import AvatarNome from './avatar-nome';
 import LinkIconWithText from './link-icon-with-text';
 import { formatterChavePix, formatterDate, getSigno } from './utils';
 
-export const useColumns = () => {
+export const useColumns = (isAuthenticated: boolean) => {
+  const dadosAutenticados: ColumnDef<Aniversario>[] = [
+    {
+      accessorKey: 'aniversariantetipochavepix',
+      header: 'Tipo Chave Pix',
+      cell: ({ row: { getValue } }) => {
+        const tipoChave = getValue('aniversariantetipochavepix') as string;
+        return (
+          <p className={tipoChave === 'cpf' ? 'uppercase' : 'capitalize'}>
+            {getValue('aniversariantetipochavepix')}
+          </p>
+        );
+      },
+    },
+    {
+      accessorKey: 'aniversariantechavepix',
+      header: 'Chave Pix',
+      cell: ({ row: { getValue } }) => {
+        const tipoChave = getValue(
+          'aniversariantetipochavepix'
+        ) as TipoChavePix;
+        const chave = getValue('aniversariantechavepix') as string;
+        return formatterChavePix(tipoChave, chave);
+      },
+    },
+  ];
+
+  const dados = isAuthenticated ? dadosAutenticados : [];
+
   const columns: ColumnDef<Aniversario>[] = [
-    // {
-    //   accessorKey: 'idaniversariante',
-    //   header: '',
-    // },
     {
       accessorKey: 'aniversariantenome',
       header: 'Aniversariante',
@@ -64,29 +88,7 @@ export const useColumns = () => {
         return data.substring(0, aniversario);
       },
     },
-    {
-      accessorKey: 'aniversariantetipochavepix',
-      header: 'Tipo Chave Pix',
-      cell: ({ row: { getValue } }) => {
-        const tipoChave = getValue('aniversariantetipochavepix') as string;
-        return (
-          <p className={tipoChave === 'cpf' ? 'uppercase' : 'capitalize'}>
-            {getValue('aniversariantetipochavepix')}
-          </p>
-        );
-      },
-    },
-    {
-      accessorKey: 'aniversariantechavepix',
-      header: 'Chave Pix',
-      cell: ({ row: { getValue } }) => {
-        const tipoChave = getValue(
-          'aniversariantetipochavepix'
-        ) as TipoChavePix;
-        const chave = getValue('aniversariantechavepix') as string;
-        return formatterChavePix(tipoChave, chave);
-      },
-    },
+    ...dados,
     {
       accessorKey: 'responsavelnome',
       header: () => (
