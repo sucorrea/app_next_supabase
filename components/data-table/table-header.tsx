@@ -5,10 +5,13 @@ import { flexRender } from '@tanstack/react-table';
 
 type DataTableHeaderProps<TData> = {
   table: Table<TData>;
-};
+} & React.HTMLAttributes<HTMLTableSectionElement>;
 
-const DataTableHeader = <TData,>({ table }: DataTableHeaderProps<TData>) => (
-  <TableHeader>
+const DataTableHeader = <TData,>({
+  table,
+  ...props
+}: DataTableHeaderProps<TData>) => (
+  <TableHeader {...props}>
     {table.getHeaderGroups().length > 0 &&
       table.getHeaderGroups().map(({ headers, id }) => (
         <TableRow key={id}>

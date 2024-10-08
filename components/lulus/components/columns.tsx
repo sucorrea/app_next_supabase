@@ -5,10 +5,10 @@ import { Icon } from '@iconify/react';
 import { ColumnDef } from '@tanstack/react-table';
 
 import { LINK_HOROSCOPO_DIARIO, LINK_INSTAGRAM } from '@/utils/constants';
+import { Aniversario, TipoChavePix } from '@/utils/types/Types';
 import AvatarNome from './avatar-nome';
 import LinkIconWithText from './link-icon-with-text';
 import { formatterChavePix, formatterDate, getSigno } from './utils';
-import { Aniversario, TipoChavePix } from '@/utils/types/Types';
 
 export const useColumns = (isAuthenticated: boolean) => {
   const dadosAutenticados: ColumnDef<Aniversario>[] = [
@@ -80,9 +80,9 @@ export const useColumns = (isAuthenticated: boolean) => {
       size: 100,
       minSize: 100,
       cell: ({ row: { getValue } }) => {
-        const data = formatterDate(getValue('aniversariantebirthdate') ?? '');
-        const aniversario = data.lastIndexOf(' de ');
-        return data.substring(0, aniversario);
+        return formatterDate(getValue('aniversariantebirthdate') ?? '');
+        // const aniversario = data.lastIndexOf(' de ');
+        // return data.substring(0, aniversario);
       },
     },
     ...dados,

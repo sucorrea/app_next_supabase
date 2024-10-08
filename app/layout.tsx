@@ -4,6 +4,8 @@ import { GeistSans } from 'geist/font/sans';
 
 import HeaderAuth from '@/components/header-auth';
 import { ThemeSwitcher } from '@/components/theme-switcher';
+import Image from 'next/image';
+import Link from 'next/link';
 import './globals.css';
 import Providers from './providers';
 
@@ -26,19 +28,26 @@ const RootLayout = ({ children }: RootLayoutProps) => (
     <body className="bg-background text-foreground">
       <Providers>
         <Suspense fallback={<p>Fetching data...</p>}>
-          <main className="flex min-h-screen flex-col items-center">
-            <div className="flex w-full flex-1 flex-col items-center gap-20">
+          <main className="">
+            <div className="">
               <nav className="flex h-16 w-full justify-center border-b border-b-foreground/10">
-                <div className="flex w-full max-w-5xl items-center justify-between p-3 px-5 text-sm">
-                  <div className="flex items-center gap-5 font-semibold">
-                    <ThemeSwitcher />
-                    <HeaderAuth />
-                  </div>
+                <div className="flex w-full items-center justify-between p-3 px-5 text-sm">
+                  <Link href="/" className="flex items-center gap-2">
+                    <Image
+                      src="/fotos/luluzinha.jpg"
+                      alt="luluzinha"
+                      width={30}
+                      height={30}
+                    />
+                    <p className="font-pacifico text-4xl font-bold text-primary">
+                      Lulus
+                    </p>
+                  </Link>
+
+                  <HeaderAuth />
                 </div>
               </nav>
-              <div className="flex max-w-5xl flex-col gap-20 p-5">
-                {children}
-              </div>
+              <div className="flex flex-col p-2">{children}</div>
               <footer className="mx-auto flex w-full items-center justify-center gap-8 border-t py-16 text-center text-xs">
                 <ThemeSwitcher />
               </footer>

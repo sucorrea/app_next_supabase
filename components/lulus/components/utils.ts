@@ -1,14 +1,17 @@
-import { TipoChavePix } from '@/utils/types/Types';
+import { Aniversario, TipoChavePix } from '@/utils/types/Types';
 import { formatToCPF, formatToPhone } from 'brazilian-values';
 
 export const formatterDate = (data: string): string => {
   const date = new Date(data);
 
-  return date.toLocaleDateString('pt-BR', {
+  const dataFormatterd = date.toLocaleDateString('pt-BR', {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
   });
+
+  const aniversario = dataFormatterd.lastIndexOf(' de ');
+  return dataFormatterd.substring(0, aniversario);
 };
 
 export type ValueFormatter = (value: string) => string;
@@ -114,4 +117,41 @@ export function getIconeSigno(signo: string): string {
     default:
       throw new Error('Signo inválido');
   }
+}
+
+export function getNextBirthday(
+  aniversarios: Aniversario[]
+): Aniversario | null {
+  const today = new Date();
+  const currentYear = today.getFullYear();
+
+  // Converte as datas de nascimento em datas completas neste ano ou no próximo
+  const upcomingBirthdays = aniversarios.map((aniversario) => {
+    const birthDate = new Date(aniversario.aniversariantebirthdate);
+
+    // Altera o ano do aniversário para o ano atual
+    const thisYearBirthday = new Date(
+      currentYear,
+      birthDate.getMonth(),
+      birthDate.getDate()
+    );
+
+    // Se o aniversário deste ano já passou, usa o ano seguinte
+    if (thisYearBirthday < today) {
+      thisYearBirthday.setFullYear(currentYear + 1);
+    }
+
+    return {
+      ...aniversario,
+      nextBirthday: thisYearBirthday,
+    };
+  });
+
+  // Ordena os aniversários pela data mais próxima
+  const sortedBirthdays = upcomingBirthdays.sort((a, b) => {
+    return a.nextBirthday.getTime() - b.nextBirthday.getTime();
+  });
+
+  // Retorna o próximo aniversário ou null se a lista estiver vazia
+  return sortedBirthdays.length > 0 ? sortedBirthdays[0] : null;
 }

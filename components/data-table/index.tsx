@@ -9,18 +9,15 @@ import {
 } from '@tanstack/react-table';
 
 import { useState } from 'react';
-import ColumnVisibilityDropdown from '../lulus/components/column-visibility-drop-down';
 import { Table as TableUi } from '../ui/table';
-import DataTableInputFilter, {
-  DataTableInputFilterProps,
-} from './data-table-input-filter';
+import DataTableInputFilter from './data-table-input-filter';
 import DataTableBody from './table-body';
 import DataTableHeader from './table-header';
 
 type DataTableProps<TData> = {
   columns: ColumnDef<TData>[];
   hasFilter?: boolean;
-  filterProps?: DataTableInputFilterProps<TData>;
+  columnIdFilter?: keyof TData & string;
   rows: TData[];
 };
 
@@ -28,7 +25,7 @@ const DataTable = <TData,>({
   rows,
   columns,
   hasFilter = true,
-  filterProps,
+  columnIdFilter = 'id' as keyof TData & string,
 }: DataTableProps<TData>) => {
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
@@ -52,17 +49,17 @@ const DataTable = <TData,>({
       <div className="flex w-full">
         <div className="flex items-center py-4">
           <div>
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 p-2">
               {hasFilter && (
                 <DataTableInputFilter
                   table={table}
-                  columnId={filterProps?.columnId as keyof TData & string}
+                  columnId={columnIdFilter as keyof TData & string}
                 />
               )}
-              <ColumnVisibilityDropdown table={table} />
+              {/* <ColumnVisibilityDropdown table={table} /> */}
             </div>
             <TableUi>
-              <DataTableHeader table={table} />
+              <DataTableHeader table={table} className="bg-amber-100" />
               <DataTableBody table={table} columns={columns} />
             </TableUi>
           </div>

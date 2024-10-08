@@ -6,13 +6,14 @@ import { flexRender } from '@tanstack/react-table';
 type DataTableBodyProps<TData> = {
   table: Table<TData>;
   columns: ColumnDef<TData>[];
-};
+} & React.HTMLAttributes<HTMLTableSectionElement>;
 
 const DataTableBody = <TData,>({
   table,
   columns,
+  ...props
 }: DataTableBodyProps<TData>) => (
-  <TableBody>
+  <TableBody {...props}>
     {table.getRowModel().rows?.length ? (
       table.getRowModel().rows.map((row) => (
         <TableRow key={row.id} data-state={row.getIsSelected() && 'selected'}>

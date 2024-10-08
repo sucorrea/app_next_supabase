@@ -2,9 +2,9 @@
 
 import { getUser } from '@/app/actions';
 import DataTable from '@/components/data-table';
+import { Aniversario } from '@/utils/types/Types';
 import { useEffect, useState } from 'react';
 import { useColumns } from './columns';
-import { Aniversario } from '@/utils/types/Types';
 
 type ListaLulusProps = {
   data: Aniversario[];
@@ -24,8 +24,15 @@ const ListaLulus = ({ data }: ListaLulusProps) => {
     });
   }, []);
 
-  const row = data || [];
-
-  return <DataTable rows={row} columns={columns} />;
+  return (
+    <div className="m-4 flex w-full items-center justify-center">
+      <DataTable
+        rows={data ?? []}
+        columns={columns}
+        columnIdFilter="aniversariantenome"
+      />
+    </div>
+  );
 };
+
 export default ListaLulus;

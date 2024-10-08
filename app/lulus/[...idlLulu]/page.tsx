@@ -8,9 +8,9 @@ import {
 
 import { notFound } from 'next/navigation';
 
+import { getLuluById } from '@/app/actions';
 import LuluCardFooter from './lulu-card-footer';
 import LuluCardImage from './lulu-card-image';
-import { getFotosById, getLuluById } from '@/app/actions';
 
 export async function generateMetadata({
   params,
@@ -22,7 +22,7 @@ export async function generateMetadata({
   }
 
   return {
-    title: params.idlLulu,
+    title: params.idlLulu[1],
     description: '',
   };
 }
@@ -32,25 +32,26 @@ export default async function Page({
 }: {
   params: { idlLulu: string };
 }) {
-  if (!params.idlLulu) {
+  if (!params.idlLulu[0]) {
     notFound();
   }
 
-  const lulu = await getLuluById(Number(params.idlLulu));
+  console.log(params);
 
-  const image = await getFotosById(Number(params.idlLulu));
+  const lulu = await getLuluById(Number(params.idlLulu[0]));
 
+  // const image = await getFotosById(Number(params.idlLulu));
   return (
     <Card>
       {/* //className="w-full" */}
       <CardHeader>
         <CardTitle>{lulu.nome}</CardTitle>
-        <CardDescription>{`@${lulu.instagram}`}</CardDescription>
+        <CardDescription>{`@${lulu?.instagram}`}</CardDescription>
       </CardHeader>
       <CardContent>
-        <>
-          <LuluCardImage image={image} name={lulu.nome} />
-          {/* <form>
+        <LuluCardImage image={lulu?.foto} name={lulu?.nome} />
+        {/* <> */}
+        {/* <form>
             <div className="grid w-full items-center gap-4">
               <div className="flex flex-col space-y-1.5">
                 <Label htmlFor="name">Name</Label>
@@ -72,7 +73,7 @@ export default async function Page({
               </div>
             </div>
           </form> */}
-        </>
+        {/* </> */}
       </CardContent>
       <LuluCardFooter />
     </Card>
