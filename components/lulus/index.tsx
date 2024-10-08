@@ -12,13 +12,6 @@ const Lulus = async () => {
       <hr />
       <ListaLulus data={listaAniversarios} />
     </div>
-    // <div className="flex flex-col items-center">
-    //   <div className={cn('flex flex-col gap-2', scroll)}>
-    //     <div className="flex gap-2">
-    //     </div>
-    //     <p className="text-4xl font-bold text-primary">Aniversários</p>
-    //   </div>
-    // </div>
   );
 };
 

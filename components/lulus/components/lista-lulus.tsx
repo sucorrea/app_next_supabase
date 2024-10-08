@@ -25,7 +25,8 @@ const ListaLulus = ({ data }: ListaLulusProps) => {
   }, []);
 
   return (
-    <div className="m-4 flex w-full items-center justify-center">
+    // eslint-disable-next-line prettier/prettier
+    <div className="lg:flex items-center justify-center m-4">
       <DataTable
         rows={data ?? []}
         columns={columns}
