@@ -6,10 +6,9 @@ import { getNextBirthday } from './components/utils';
 const Lulus = async () => {
   const listaAniversarios = await getAniversarios();
 
-  console.log('listaAniversarios', listaAniversarios);
   const listaAniversariosOrdenada = listaAniversarios.sort((a, b) => {
-    const mesDiaA = a.aniversariantebirthdate.substring(5, 10); // 'MM-DD'
-    const mesDiaB = b.aniversariantebirthdate.substring(5, 10); // 'MM-DD'
+    const mesDiaA = a.aniversariantebirthdate.substring(5, 10);
+    const mesDiaB = b.aniversariantebirthdate.substring(5, 10);
 
     return mesDiaA.localeCompare(mesDiaB);
   });
