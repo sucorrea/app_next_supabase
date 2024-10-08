@@ -17,7 +17,6 @@ const ListaLulus = ({ data }: ListaLulusProps) => {
 
   useEffect(() => {
     user.then((user) => {
-      console.log('user', user.user);
       if (user.user?.id) {
         setIsAuthenticated(true);
       }
@@ -26,7 +25,7 @@ const ListaLulus = ({ data }: ListaLulusProps) => {
 
   return (
     // eslint-disable-next-line prettier/prettier
-    <div className="lg:flex items-center justify-center m-4">
+    <div className="m-4 items-center justify-center lg:flex">
       <DataTable
         rows={data ?? []}
         columns={columns}

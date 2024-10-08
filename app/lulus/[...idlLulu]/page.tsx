@@ -36,11 +36,8 @@ export default async function Page({
     notFound();
   }
 
-  console.log(params);
-
   const lulu = await getLuluById(Number(params.idlLulu[0]));
 
-  // const image = await getFotosById(Number(params.idlLulu));
   return (
     <Card>
       {/* //className="w-full" */}
