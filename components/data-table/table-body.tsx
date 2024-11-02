@@ -1,6 +1,5 @@
 import React, { HTMLAttributes } from 'react';
 import { ColumnDef, Table } from '@tanstack/react-table';
-
 import { TableBody, TableCell, TableRow } from '@/components/ui/table';
 import { flexRender } from '@tanstack/react-table';
 
@@ -9,13 +8,9 @@ type DataTableBodyProps<TData> = {
   columns: ColumnDef<TData>[];
 } & HTMLAttributes<HTMLTableSectionElement>;
 
-const DataTableBody = <TData,>({
-  table,
-  columns,
-  ...props
-}: DataTableBodyProps<TData>) => (
+const DataTableBody = <TData,>({ table, columns, ...props }: DataTableBodyProps<TData>) => (
   <TableBody {...props}>
-    {!!table.getRowModel().rows?.length ? (
+    {table.getRowModel().rows.length ? (
       table.getRowModel().rows.map((row) => (
         <TableRow key={row.id} data-state={row.getIsSelected() && 'selected'}>
           {row.getVisibleCells().map((cell) => (
