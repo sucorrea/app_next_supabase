@@ -1,5 +1,4 @@
 'use client';
-
 import { getUser } from '@/app/actions';
 import DataTable from '@/components/data-table';
 import { Aniversario } from '@/utils/types/Types';
@@ -24,7 +23,6 @@ const ListaLulus = ({ data }: ListaLulusProps) => {
   }, []);
 
   return (
-    // eslint-disable-next-line prettier/prettier
     <div className="m-4 items-center justify-center lg:flex">
       <DataTable
         rows={data ?? []}

@@ -81,8 +81,6 @@ export const useColumns = (isAuthenticated: boolean) => {
       minSize: 100,
       cell: ({ row: { getValue } }) => {
         return formatterDate(getValue('aniversariantebirthdate') ?? '');
-        // const aniversario = data.lastIndexOf(' de ');
-        // return data.substring(0, aniversario);
       },
     },
     ...dados,

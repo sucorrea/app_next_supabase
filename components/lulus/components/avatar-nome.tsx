@@ -48,7 +48,7 @@ const AvatarNome = ({ row, isResponsavel = false }: AvatarNomeProps) => {
   return (
     <Link href={`/lulus/${idRoute}/${nome}`}>
       <div className={cn('flex items-center gap-2', classResponsavel)}>
-        <Avatar>
+        <Avatar className="h-20 w-20" >
           <AvatarImage src={image} alt={nome} title={nome} />
           <AvatarFallback>{nome.charAt(0)}</AvatarFallback>
         </Avatar>

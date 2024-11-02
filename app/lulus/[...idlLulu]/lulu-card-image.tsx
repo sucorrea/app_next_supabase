@@ -14,7 +14,7 @@ const LuluCardImage = ({ image, name }: LuluCardImageProps) => {
         height={200}
         alt={name}
         className={
-          'aspect-auto h-auto w-auto object-cover transition-all hover:scale-105'
+          'aspect-auto h-auto w-auto rounded object-cover shadow-card transition-all hover:scale-105 hover:rounded'
         }
       />
     </div>
