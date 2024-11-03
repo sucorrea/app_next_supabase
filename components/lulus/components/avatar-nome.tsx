@@ -12,10 +12,21 @@ interface AvatarNomeProps {
 }
 
 const AvatarNome = ({ row, isResponsavel = false }: AvatarNomeProps) => {
-  const { idaniversariante, aniversariantenome, aniversarianteapelido, responsavelapelido, responsavelnome, idresponsavel, responsavelfoto, aniversariantefoto } = row.original ?? ({} as Aniversario);
+  const {
+    idaniversariante,
+    aniversariantenome,
+    aniversarianteapelido,
+    responsavelapelido,
+    responsavelnome,
+    idresponsavel,
+    responsavelfoto,
+    aniversariantefoto,
+  } = row.original ?? ({} as Aniversario);
 
   const image = isResponsavel ? responsavelfoto : aniversariantefoto;
-  const nome = isResponsavel ? (responsavelapelido ?? responsavelnome) : (aniversarianteapelido ?? aniversariantenome);
+  const nome = isResponsavel
+    ? (responsavelapelido ?? responsavelnome)
+    : (aniversarianteapelido ?? aniversariantenome);
   const classResponsavel = isResponsavel ? 'flex-row-reverse' : '';
   const idRoute = isResponsavel ? idresponsavel : idaniversariante;
 

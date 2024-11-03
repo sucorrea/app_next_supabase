@@ -41,16 +41,18 @@ const RootLayout = ({ children }: RootLayoutProps) => (
                       width={30}
                       height={30}
                     />
-                    <p className="font-pacifico text-4xl font-bold text-primary">
-                      Lulus
-                    </p>
                   </Link>
-
+                  <p className="font-pacifico text-4xl font-bold text-primary">
+                    {`Lulus ${ano}`}
+                  </p>
                   <HeaderAuth />
                 </div>
               </nav>
               <div className="flex flex-col p-2">{children}</div>
-              <footer className="mx-auto flex w-full items-center justify-center gap-8 border-t py-16 text-center text-xs">
+              <footer className="mx-auto flex w-full items-center justify-center gap-4 border-t text-center text-xs">
+                <p className="text-center text-xs">
+                  &copy; {ano} Luluzinha. All rights reserved.
+                </p>
                 <ThemeSwitcher />
               </footer>
             </div>

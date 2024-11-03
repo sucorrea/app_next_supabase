@@ -8,7 +8,11 @@ type DataTableBodyProps<TData> = {
   columns: ColumnDef<TData>[];
 } & HTMLAttributes<HTMLTableSectionElement>;
 
-const DataTableBody = <TData,>({ table, columns, ...props }: DataTableBodyProps<TData>) => (
+const DataTableBody = <TData,>({
+  table,
+  columns,
+  ...props
+}: DataTableBodyProps<TData>) => (
   <TableBody {...props}>
     {table.getRowModel().rows.length ? (
       table.getRowModel().rows.map((row) => (
