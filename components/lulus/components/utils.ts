@@ -119,9 +119,7 @@ export function getIconeSigno(signo: string): string {
   }
 }
 
-export function getNextBirthday(
-  aniversarios: Aniversario[]
-): Aniversario | null {
+export function getNextBirthday(aniversarios: any[]): Aniversario | null {
   const today = new Date();
   const currentYear = today.getFullYear();
 

@@ -2,15 +2,17 @@ import { getAniversarios } from '@/app/actions';
 import ListaLulus from './components/lista-lulus';
 import NextBirthday from './components/next-birthday';
 import { getNextBirthday } from './components/utils';
+import { getAniversariosData } from '@/mock/lulus';
 
 const Lulus = async () => {
-  const listaAniversarios = await getAniversarios();
+  // const listaAniversarios = await getAniversarios();
+  const listaAniversarios = getAniversariosData() ?? [];
 
   const listaAniversariosOrdenada = listaAniversarios?.sort((a, b) => {
-    const mesDiaA = a.aniversariantebirthdate.substring(5, 10);
-    const mesDiaB = b.aniversariantebirthdate.substring(5, 10);
+    const mesDiaA = a.aniversariantebirthdate?.substring(5, 10);
+    const mesDiaB = b.aniversariantebirthdate?.substring(5, 10);
 
-    return mesDiaA.localeCompare(mesDiaB);
+    return mesDiaA?.localeCompare(mesDiaB);
   });
 
   return (

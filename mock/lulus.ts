@@ -1,3 +1,33 @@
+export function getAniversariosData() {
+  return aniversarios2024.map((aniversario) => {
+    const aniversariante = lulus.find(
+      (lulu) => lulu.id === aniversario.idAniversariante
+    );
+    const responsavel = lulus.find(
+      (lulu) => lulu.id === aniversario.idResponsavel
+    );
+
+    return {
+      idaniversariante: aniversariante?.id ?? 0,
+      aniversariantenome: aniversariante?.nome ?? '',
+      aniversariantefoto: aniversariante?.foto ?? '',
+      aniversariantebirthdate: aniversariante?.birthdate ?? '',
+      aniversarianteiconesigno: aniversariante?.iconesigno ?? '',
+      aniversariantetipochavepix: aniversariante?.tipoChavePix ?? '',
+      aniversariantechavepix: aniversariante?.chavePix ?? '',
+      aniversarianteapelido: aniversariante?.apelido ?? '',
+      aniversariantesobrenome: aniversariante?.sobrenome ?? '',
+      aniversariantinstagram: aniversariante?.instagram ?? '',
+      aniversariantepictureurl: aniversariante?.picture_url ?? '',
+      idresponsavel: responsavel?.id ?? 0,
+      responsavelnome: responsavel?.nome ?? '',
+      responsavelfoto: responsavel?.foto ?? '',
+      responsavelpictureurl: responsavel?.picture_url ?? '',
+      responsavelapelido: responsavel?.apelido ?? '',
+    };
+  });
+}
+
 export const lulus = [
   {
     id: 4,
@@ -344,3 +374,60 @@ export const aniversarios2024 = [
     idAniversariante: 33,
   },
 ];
+//DO $$
+// BEGIN
+//   IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'chaveenum') THEN
+//     CREATE TYPE chaveEnum AS ENUM ('email', 'celular', 'aleatoria', 'cpf');
+//   END IF;
+// END $$;
+
+// DROP FUNCTION IF EXISTS get_aniversarios();
+
+// CREATE OR REPLACE FUNCTION get_aniversarios()
+// RETURNS TABLE (
+//     idAniversariante INTEGER,
+//     aniversarianteNome VARCHAR,
+//     aniversarianteFoto VARCHAR,
+//     aniversarianteBirthdate timestamp,
+//     aniversarianteIconeSigno text,
+//     aniversarianteTipoChavePix chaveEnum,
+//     aniversarianteChavePix text,
+//     aniversarianteApelido text,
+//     aniversarianteSobrenome text,
+//     aniversariantInstagram text,
+//     aniversariantePictureUrl text,
+//     idResponsavel INTEGER,
+//     responsavelNome VARCHAR,
+//     responsavelFoto VARCHAR,
+//     responsavelPictureUrl text,
+//     responsavelApelido text
+
+// ) AS $$
+// BEGIN
+//   RETURN QUERY
+//   SELECT
+//     aniversarios2024."idAniversariante",
+//     aniversariante.nome AS aniversarianteNome,
+//     aniversariante.foto AS aniversarianteFoto,
+//     aniversariante.birthdate AS aniversarianteBirthdate,
+//     aniversariante.iconesigno AS aniversarianteIconeSigno,
+//     aniversariante."tipoChavePix" AS aniversarianteTipoChavePix,
+//     aniversariante."chavePix" AS aniversarianteChavePix,
+//       aniversariante.apelido AS  aniversarianteApelido ,
+//     aniversariante.sobrenome AS aniversarianteSobrenome ,
+//     aniversariante.instagram AS aniversariantInstagram ,
+//     aniversariante.picture_url AS aniversariantePictureUrl,
+//     aniversarios2024."idResponsavel",
+//     responsavel.nome AS responsavelNome,
+//     responsavel.foto AS responsavelFoto,
+//     responsavel.picture_url AS responsavelPictureUrl,
+
+//     responsavel.apelido as responsavelApelido
+//   FROM
+//     aniversarios2024
+//     JOIN lulus AS aniversariante ON aniversarios2024."idAniversariante" = aniversariante.id
+//     JOIN lulus AS responsavel ON aniversarios2024."idResponsavel" = responsavel.id
+//   ORDER BY
+//     aniversarios2024."idAniversariante";
+// END;
+// $$ LANGUAGE plpgsql;
