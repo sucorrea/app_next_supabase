@@ -51,7 +51,7 @@ const FotoNome = ({
       <div className={cn('flex items-center gap-2', classResponsavel)}>
         <Avatar className={classNameFoto}>
           <AvatarImage src={imagem} alt={nome} title={nome} />
-          <AvatarFallback>{nome.charAt(0)}</AvatarFallback>
+          <AvatarFallback>{nome?.charAt(0)}</AvatarFallback>
         </Avatar>
         <p className="text-nowrap text-2xl capitalize">{nome}</p>
       </div>

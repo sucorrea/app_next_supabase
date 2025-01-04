@@ -125,18 +125,15 @@ export function getNextBirthday(
   const today = new Date();
   const currentYear = today.getFullYear();
 
-  // Converte as datas de nascimento em datas completas neste ano ou no próximo
-  const upcomingBirthdays = aniversarios.map((aniversario) => {
+  const upcomingBirthdays = aniversarios?.map((aniversario) => {
     const birthDate = new Date(aniversario.aniversariantebirthdate);
 
-    // Altera o ano do aniversário para o ano atual
     const thisYearBirthday = new Date(
       currentYear,
       birthDate.getMonth(),
       birthDate.getDate()
     );
 
-    // Se o aniversário deste ano já passou, usa o ano seguinte
     if (thisYearBirthday < today) {
       thisYearBirthday.setFullYear(currentYear + 1);
     }
@@ -147,11 +144,9 @@ export function getNextBirthday(
     };
   });
 
-  // Ordena os aniversários pela data mais próxima
-  const sortedBirthdays = upcomingBirthdays.sort((a, b) => {
+  const sortedBirthdays = upcomingBirthdays?.sort((a, b) => {
     return a.nextBirthday.getTime() - b.nextBirthday.getTime();
   });
 
-  // Retorna o próximo aniversário ou null se a lista estiver vazia
-  return sortedBirthdays.length > 0 ? sortedBirthdays[0] : null;
+  return sortedBirthdays?.length > 0 ? sortedBirthdays[0] : null;
 }

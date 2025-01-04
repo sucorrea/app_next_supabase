@@ -6,7 +6,7 @@ import { getNextBirthday } from './components/utils';
 const Lulus = async () => {
   const listaAniversarios = await getAniversarios();
 
-  const listaAniversariosOrdenada = listaAniversarios.sort((a, b) => {
+  const listaAniversariosOrdenada = listaAniversarios?.sort((a, b) => {
     const mesDiaA = a.aniversariantebirthdate.substring(5, 10);
     const mesDiaB = b.aniversariantebirthdate.substring(5, 10);
 

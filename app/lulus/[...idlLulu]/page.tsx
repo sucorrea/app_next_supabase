@@ -11,6 +11,7 @@ import { notFound } from 'next/navigation';
 import { getLuluById } from '@/app/actions';
 import LuluCardFooter from './lulu-card-footer';
 import LuluCardImage from './lulu-card-image';
+import { LuluById } from '@/utils/types/Types';
 
 export async function generateMetadata({
   params,
@@ -36,7 +37,8 @@ export default async function Page({
     notFound();
   }
 
-  const lulu = await getLuluById(Number(params.idlLulu[0]));
+  const lulu =
+    (await getLuluById(Number(params.idlLulu[0]))) ?? ({} as LuluById);
 
   return (
     <div className="flex justify-center">

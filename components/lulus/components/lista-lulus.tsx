@@ -1,8 +1,9 @@
 'use client';
+import { useEffect, useState } from 'react';
+
 import { getUser } from '@/app/actions';
 import DataTable from '@/components/data-table';
 import { Aniversario } from '@/utils/types/Types';
-import { useEffect, useState } from 'react';
 import { useColumns } from './columns';
 
 type ListaLulusProps = {
