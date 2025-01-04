@@ -257,3 +257,90 @@ export const lulus = [
       'https://vttyctdmifvabhlvcmzd.supabase.co/storage/v1/object/public/profile_pictures/profile_pictures/3-Stella.jpg',
   },
 ];
+export const aniversarios2024 = [
+  {
+    id: 13,
+    idResponsavel: 13,
+    idAniversariante: 1,
+  },
+  {
+    id: 14,
+    idResponsavel: 12,
+    idAniversariante: 2,
+  },
+  {
+    id: 15,
+    idResponsavel: 6,
+    idAniversariante: 3,
+  },
+  {
+    id: 16,
+    idResponsavel: 8,
+    idAniversariante: 4,
+  },
+  {
+    id: 17,
+    idResponsavel: 11,
+    idAniversariante: 5,
+  },
+  {
+    id: 18,
+    idResponsavel: 7,
+    idAniversariante: 6,
+  },
+  {
+    id: 19,
+    idResponsavel: 5,
+    idAniversariante: 7,
+  },
+  {
+    id: 20,
+    idResponsavel: 10,
+    idAniversariante: 8,
+  },
+  {
+    id: 21,
+    idResponsavel: 4,
+    idAniversariante: 9,
+  },
+  {
+    id: 22,
+    idResponsavel: 9,
+    idAniversariante: 10,
+  },
+  {
+    id: 23,
+    idResponsavel: 2,
+    idAniversariante: 11,
+  },
+  {
+    id: 24,
+    idResponsavel: 1,
+    idAniversariante: 12,
+  },
+  {
+    id: 25,
+    idResponsavel: 14,
+    idAniversariante: 13,
+  },
+  {
+    id: 26,
+    idResponsavel: 3,
+    idAniversariante: 14,
+  },
+  {
+    id: 28,
+    idResponsavel: 29,
+    idAniversariante: 27,
+  },
+  {
+    id: 32,
+    idResponsavel: 29,
+    idAniversariante: 30,
+  },
+  {
+    id: 34,
+    idResponsavel: 29,
+    idAniversariante: 33,
+  },
+];
